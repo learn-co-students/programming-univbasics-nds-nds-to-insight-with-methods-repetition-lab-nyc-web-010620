@@ -1,6 +1,18 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require_relative './directors_database'
 
+require 'pry'
+
+def gross_for_director(d)
+  total = 0
+  index = 0
+    while index < d[:movies].length do
+      total += d[:movies][index][:worldwide_gross]
+      index += 1
+    end
+  total
+end
+
 def directors_totals(source)
   result = {}
   director_index = 0
@@ -12,23 +24,18 @@ def directors_totals(source)
   result
 end
 
-def gross_for_director(d)
-  total = 0
-  index = 0
-
-  while index < d[:movies].length do
-    total += d[:movies][index][:worldwide_gross]
-    index += 1
-  end
-
-  total
-end
 
 def list_of_directors(source)
-  # Write this implementation
+ array = []
+ i = 0 
+  while i < source.length do 
+    array.push(source[i][:name])
+  i += 1
+  end
+  array
 end
 
-def total_gross(source)
+def total_gross(nds)
   # Write this implementation
   #
   # Should use methods:
@@ -38,6 +45,19 @@ def total_gross(source)
   # Visit each key (i.e. director name), look up the value in the hash
   # returned by directors_totals, and add it to a running total. When done,
   # return the total
+  
+  row_index = 0 
+  total = 0 
+  while row_index < nds.length do 
+    element_index = 0 
+      while element_index < nds[row_index][:movies].length
+      total += nds[row_index][:movies][element_index][:worldwide_gross]
+      element_index += 1 
+      end 
+    row_index += 1 
+  end 
+  total
 end
+
 
 
